@@ -1,0 +1,74 @@
+body{
+    margin: 0;
+    background-color: rgb(46, 35, 32);
+
+
+}
+body>div:first-of-type{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+#scroll{
+    position: relative;
+    top: 15px;
+    z-index: 1000;
+    background-image: url(../img/scrollWindow5.png);
+    background-repeat: no-repeat;
+    background-origin: inherit;
+    background-position: center;
+    width: 720px;
+    height: 550px;
+}
+#dungeon{
+    width: 80vw;
+    font-size: 0;
+
+}
+#warior{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    z-index: 100;
+
+}
+.layer{
+    width: 80Vw;
+    position: absolute;
+}
+#topLayer>div:first-of-type{
+    position: relative;
+width: 64px;
+top:272px;
+left: 984px;
+transform: scale(1.25, 1.25);
+
+}
+#warior img{
+    transform: scale(0.75, 0.75);
+}
+
+
+.loader{
+    background-color: #000;
+    animation: Loader 2s ease both;
+z-index: 1000;
+
+}
+@keyframes Loader {
+0%{opacity: 0;
+
+}
+50%{ opacity: 1;
+
+}
+100%{
+opacity: 0;
+}
+}
