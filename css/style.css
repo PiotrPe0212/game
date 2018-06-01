@@ -1,34 +1,152 @@
-body{
+body {
     margin: 0;
-    background-color: rgb(46, 35, 32);
-
-
+    background-color: rgb(233, 222, 205);
+    font-family: 'Patrick Hand SC', cursive;
 }
-body>div:first-of-type{
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+#main {
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    filter: blur(15px);
+}
+
+#game {
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-   
 }
-#scroll{
+
+header {
+    width: 100vw;
+    height: 10vh;
+    background-color: rgb(87, 62, 8);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+#logo img:first-child {
     position: relative;
+    top: -60px;
+    left: -60px;
+    transform: scale( 0.5, 0.5);
+}
+
+#navScroll {
+    width: 200px;
+    height: 100px;
+    background-image: url(../img/scrollMenueInit.png);
+    background-repeat: no-repeat;
+    background-origin: inherit;
+    background-position-x: -65px;
+    background-position-y: -1px;
+}
+
+#navScroll:hover {
+    background-image: url(../img/scrollMenueInitHover.png);
+}
+
+div#navScroll.navOpen {
+    background-image: url(../img/scrollMenueOpen.png);
+    height: 360px;
+}
+
+nav ul {
+    visibility: hidden;
+    text-align: center;
+    list-style-type: none;
+    font-size: 1.8rem;
+    margin: 0;
+    padding: 0;
+    padding-left: 30px;
+    padding-top: 70px;
+}
+
+div.navOpen ul {
+    visibility: initial;
+}
+
+nav ul>li>a {
+    color: #000;
+    text-decoration: none;
+}
+
+nav ul>li>a:hover {
+    color: #fff;
+}
+
+div.scroll {
+    position: absolute;
     top: 15px;
+    left: 20vw;
     z-index: 1000;
-    background-image: url(../img/scrollWindow5.png);
+    background-image: url(../img/scrollWindow.gif);
     background-repeat: no-repeat;
     background-origin: inherit;
     background-position: center;
     width: 720px;
     height: 550px;
 }
-#dungeon{
-    width: 80vw;
-    font-size: 0;
 
+#scroll>div:first-of-type {
+    margin-left: 45px;
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+    transition-delay: 0.8s;
 }
-#warior{
+
+.text div:first-child {
+    width: 32px;
+    height: 32px;
+    background-image: url(../img/cross.png);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.text div:first-child:hover {
+    background-image: url(../img/crossClick.png);
+}
+
+/* #wariorLayer{
+    background: radial-gradient(ellipse at center, rgba(218, 144, 6, 0.08) 0%, rgb(0, 0, 0) 40%,rgba(0,0,0,1) 100%);
+
+} */
+
+#dungeon {
+    /* width: 70vw;
+    height: 70vh; */
+    font-size: 0;
+    border: 3px solid rgb(70, 69, 69);
+}
+
+/* #dungeon:first-child{
+
+} */
+
+#warior {
     position: relative;
     display: flex;
     justify-content: center;
@@ -36,39 +154,232 @@ body>div:first-of-type{
     width: 64px;
     height: 64px;
     z-index: 100;
-
 }
-.layer{
-    width: 80Vw;
+
+.layer {
+    width: 70vw;
     position: absolute;
 }
-#topLayer>div:first-of-type{
+
+#shadowLayer {
+    z-index: 10000;
+}
+
+#signs {
     position: relative;
-width: 64px;
-top:272px;
-left: 984px;
-transform: scale(1.25, 1.25);
+    background-image: url(../img/signs.png);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    width: 64px;
+    height: 64px;
+    top: 190px;
+    left: 655px;
+    transform: scale(1.25, 1.25);
+}
+#topLayerStart div.light {
+    background-image: url(../img/signsLight.png);
+}
+#cloud{
+    position: relative;
+    background-image: url(../img/cloud.png);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    width: 128px;
+    height: 128px;
+    top: 180px;
+    left: 640px;
+   visibility: hidden;
+   transform: scale(1.5, 1.5);
+   display: flex;
+   flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
-#warior img{
+#cloud p{
+    font-size: 0.8rem;
+    margin:0 0 8px 0;
+}
+
+
+#lewer {
+    position: relative;
+    background-image: url(../img/lewerUp.png);
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center;
+    width: 64px;
+    height: 64px;
+    top: 190px;
+    left: 60px;
+    transform: scale(0.7, 0.7);
+}
+#topLayerTech div.light{
+    background-image: url(../img/lewerUpLight.png);
+}
+#topLayerTech div.down{
+    background-image: url(../img/lewerDown.png);
+
+}
+
+.blackblock, #movingBlock, #html, #css, #js, #bs{
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    transform: scale(0.7, 0.7);
+    left: 448px;
+    top: -5px;
+    background-color: #000;
+
+}
+#html, #css, #js, #bs{
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+
+}
+#html.move{
+    visibility: visible;
+    animation: MoveHtml 1s ease both;
+    animation-delay: 1s
+}
+#css.move{
+    visibility: visible;
+    animation: MoveCss 1s ease both;
+    animation-delay: 2s;
+}
+#js.move{
+    visibility: visible;
+    animation: MoveJs 1s ease both;
+    animation-delay: 3s;
+}
+#bs.move{
+    visibility: visible;
+    animation: MoveBs 1s ease both;
+    animation-delay: 4s;
+}
+
+
+@keyframes MoveHtml{
+    0% {
+        top: -5px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 300px;
+        transform: scale(1.5, 1.5);
+
+    }  
+}
+@keyframes MoveCss{
+    0% {
+        top: -5px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 400px;
+        transform: scale(1.5, 1.5);
+
+    }  
+}
+@keyframes MoveJs{
+    0% {
+        top: -5px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 500px;
+        transform: scale(1.5, 1.5);
+
+    }  
+}
+@keyframes MoveBs{
+    0% {
+        top: -5px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 600px;
+        transform: scale(1.5, 1.5);
+
+    }  
+}
+#movingBlock{
+    z-index: 1111;
+    background: url(../img/bricks/Brick.png);
+}
+#movingBlock.move{
+    animation: Move 1s ease both;
+}
+
+@keyframes Move{
+    0% {
+        top: -5px;
+        left: 448px;
+    }
+    50% {
+        top: 45px;
+        left: 448px;
+    }
+    100% {
+        top: 45px;
+        left: 400px;
+    }  
+}
+#warior img {
     transform: scale(0.75, 0.75);
 }
 
-
-.loader{
+.loader {
     background-color: #000;
     animation: Loader 2s ease both;
-z-index: 1000;
-
+    z-index: 1000;
 }
+
 @keyframes Loader {
-0%{opacity: 0;
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
+footer {
+    width: 100vw;
+    height: 5vh;
+    background-color: rgb(70, 69, 69);
+    /* position: absolute; */
+    bottom: 0;
 }
-50%{ opacity: 1;
 
-}
-100%{
-opacity: 0;
-}
+footer>p {
+    margin: 0;
 }

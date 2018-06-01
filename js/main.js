@@ -4,6 +4,14 @@
 const warior = document.getElementById("warior");
 const wariorImg = document.getElementById("wariorImg");
 const dungeon = document.getElementById("dungeon");
+const scroll = document.getElementById("scroll");
+const navScroll = document.getElementById("navScroll");
+const cross = document.getElementById("cross");
+const signs = document.getElementById("signs");
+const lewer = document.getElementById("lewer");
+const cloud = document.getElementById("cloud");
+const topLayers = Array.from(document.getElementsByClassName("topLayer"));
+const techBlocks = Array.from(document.getElementsByClassName("techBlock"));
 const mapMatrix1 = [];
 const mapMatrix2 = [];
 const animVal = 10;
@@ -13,10 +21,10 @@ let pageNumber = 0;
 let actualMap;
 let windowWidth = document.body.offsetWidth;
 let gameHeight = document.body.offsetHeight;
-let gameWidth = windowWidth * 0.8;
+let gameWidth = windowWidth * 0.7;
 let gameScale = gameWidth / 1280;
 let animStep = 0;
-
+let navClick = 0;
 //main object//
 
 let hero = {
@@ -169,12 +177,13 @@ colision = (posEnd) => {
                 hero.endY = true;
         }
     });
-    console.log(hero.xSquare);
-    console.log(hero.ySquare);
 };
 
 moving = (direction) => {
+    console.log(hero.posX, hero.posY);
+
     hero.move = true;
+
     switch (direction) {
         case 1: {
             hero.posX++;
@@ -202,6 +211,11 @@ moving = (direction) => {
         }
     };
     animGenerator();
+    shadow(1);
+    lightObjects();
+    cloudsClose();
+    console.log(hero.xSquare, hero.ySquare);
+
 };
 
 //map functions//
@@ -265,6 +279,7 @@ mapDrawing = () => {
         brick.style.width = `${64 * gameScale}px`;
         brick.style.height = `${64 * gameScale}px`;
     });
+   
 };
 mapEdit = () => {
     actualMap.forEach(([], index) => {
@@ -274,10 +289,67 @@ mapEdit = () => {
         else
             brick.src = "img/bricks/bricks64.png";
     });
+    if(actualMap == mapMatrix2){
+        warior.style.left = `${64 * gameScale*15}px`;
+        warior.style.top = `${64 * gameScale * 8}px`;
+    
+    hero.posX = parseInt(warior.style.left, 10) / moveScale;
+    hero.posY = parseInt(warior.style.top, 10) / moveScale;
+    scaling('init');
+    topLayers.forEach((topLayer,index)=>{
+
+        if(index == 1)
+        topLayer.style.visibility = "visible";
+        else
+        topLayer.style.visibility = "hidden";
+    })
+}
 };
 
-//Initialization//
+//Actions//
+lightObjects = () => {
+    if (hero.xSquare == 15 && hero.ySquare == 4 && actualMap == mapMatrix1)
+        signs.classList.add("light");
+    else
+        signs.classList.remove("light");
 
+    if (hero.xSquare == 1 && hero.ySquare == 4 && actualMap == mapMatrix2)
+        lewer.classList.add("light");
+    else
+        lewer.classList.remove("light");
+}
+cloudsClose = ()=>{
+    if ((hero.xSquare != 15 || hero.ySquare != 4) && actualMap == mapMatrix1)
+    cloud.style.visibility = "hidden";
+
+
+}
+//Initialization//
+shadow = (init) => {
+
+    const wariorLayer = document.getElementById('shadowLayer');
+    const wariorLayerContext = wariorLayer.getContext("2d");
+    console.log(hero.posX, hero.posY);
+    let gradient = wariorLayerContext.createRadialGradient((hero.posX + 6) * 1.2, (hero.posY + 6) * 1.2, 30, (hero.posX + 6) * 1.2, (hero.posY + 6) * 1.2, 50);
+    console.log(hero.posX, hero.posY);
+    gradient.addColorStop(0, "rgba(194, 168, 120, 0.027)");
+    gradient.addColorStop(1, "rgba(0,0,0,1)");
+    wariorLayerContext.fillStyle = gradient;
+    switch (init) {
+        case 0: {
+
+            wariorLayerContext.fillRect(0, 0, 300, 150);
+            break;
+        }
+        case 1: {
+            wariorLayerContext.clearRect(0, 0, 300, 150);
+            wariorLayerContext.fillRect(0, 0, 300, 150);
+            break;
+        }
+    };
+    console.log(hero.posX, hero.posY);
+
+};
 initialValues = () => {
     mapGeneration();
     mapChosing();
@@ -292,14 +364,46 @@ initialValues = () => {
         layer.style.height = `${640 * gameScale}px`;
     });
     warior.style.transform = `scale(${gameScale}, ${gameScale})`;
+    console.log(hero.posX, hero.posY);
+    shadow(0);
+    topLayers.forEach((topLayer,index)=>{
+
+        if(index == 0)
+        topLayer.style.visibility = "visible";
+        else
+        topLayer.style.visibility = "hidden";
+    })
 };
 
 // Interface  //
 
-scrollAnimation = () =>{
+scrollAnimation = () => {
+    scroll.classList.add("scroll");
+    Array.from(document.getElementsByClassName('text'))[0].style.visibility = "initial";
 
-    
 }
+scrollClosing = () => {
+    scroll.style.display = "none";
+    document.getElementById("main").style.filter = "none";
+}
+menuOpen = () => {
+    switch (navClick) {
+        case 0: {
+            navScroll.classList.add("navOpen");
+
+            navClick++;
+            break;
+        }
+        case 1: {
+
+            navScroll.classList.remove("navOpen");
+
+            navClick = 0;
+            break;
+        }
+    }
+}
+
 // Key handling //
 
 function checkKeyDown(key) {
@@ -310,6 +414,7 @@ function checkKeyDown(key) {
         // up aryMap
         hero.moveUp();
         warior.style.top = (`${hero.posY * 4}px`);
+        console.log(Array.from(navScroll.classList))
 
     }
     else if (key.keyCode == '40') {
@@ -328,19 +433,33 @@ function checkKeyDown(key) {
         warior.style.left = (`${hero.posX * 4}px`);
     }
     else if (key.keyCode == '32') {
-        if(hero.ySquare < 1 && hero.xSquare == 15 ){
-        document.getElementById('loader').classList.add('loader');
-        pageNumber = 1;};
-       
-        if (pageNumber == 1){
-            actualMap = mapMatrix2;
-
-        setTimeout(() => { mapEdit(); }, 500);
+        //space
+        if (hero.xSquare == 15 && hero.ySquare == 4 && actualMap == mapMatrix1){
+            cloud.style.visibility = "visible";
+            cloud.style.left = (`${(hero.posX * 4)-120}px`);
+            cloud.style.top = (`${(hero.posY * 4)-200}px`);
         }
-        // setTimeout(()=>{ document.getElementById('loader').classList.remove('loader');}, 1500);
+
+        if (hero.xSquare == 1 && hero.ySquare == 4 && actualMap == mapMatrix2){
+            lewer.classList.remove("light");
+            lewer.classList.add("down");
+            document.getElementById('shadowLayer').style.visibility = 'hidden';
+            techBlocks.forEach((techBlock, index)=>{
+                techBlock.classList.add("move");
+
+            })
+    
+        }
+            if (hero.ySquare < 1 && hero.xSquare == 15 && actualMap ==mapMatrix1) {
+                document.getElementById('loader').classList.add('loader');
+                pageNumber = 1;
+                actualMap = mapMatrix2;
+
+                setTimeout(() => {  mapEdit(), shadow(0)}, 500);
+            };
 
     };
-   
+
 };
 
 function checkKeyUp(key) {
@@ -351,10 +470,13 @@ function checkKeyUp(key) {
         wariorImg.src = 'img/knight/knight iso char_idle_0.png';
     };
 };
-
+window.onload = scrollAnimation();
 window.onload = initialValues;
 // document.getElementsByTagName("BODY")[0] = initialValues;
 // document.addEventListener("resize", initialValues());
 document.onkeyup = checkKeyUp;
 document.onkeydown = checkKeyDown;
+navScroll.addEventListener("click", menuOpen);
+cross.addEventListener("click", scrollClosing);
+// document.addEventListener("click", menuClose);
 
