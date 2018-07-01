@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,54 +11,214 @@
 
 
 
-        <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet"> 
-
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Eater" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
-        <div id="scroll"><div class="text"> <div id="cross"></div> <h1>Witaj na mojej stronie!</h1>
-        <h2>Czy jesteś gotowy na przygodę?</h2>
-    <p>Oto strona-portfolio w formie niewielkiego rouge-like'a. Przechodząc przez poszczególne etapy
-        będziesz mógł zapoznać się ze wszystkimi informacjami jakie wystepują na tego typu stronach 
-    w nieco ciekawszej formie. </p>
-<h3>Sterowanie:</h3>
-<p>Ruch: strzałki klawiatury</p>
-<p>Akcja: Spacja</p>
-<h2>Powodzenia!</h2>
 
-<p>PS: Jeśli nie masz czasu lub ochoty na grę, wszystkie informacjie dostępne są również z poziomu menu <span>powyżej</span>.</p>
-</div></div>
     <div id="main">
-        <header><div id="logo"><img src="img/logo2.png" alt=""></div><h1>Roguelike Portfolio</h1><nav><div id="navScroll"><ul>
-        <li> <a href=""O>O mnie</a></li>
-        <li><a href="">Technologie</a></li>
-        <li><a href="">Portfolio</a></li>
-        <li><a href="">Kontakt</a></li></ul></div></nav></header>
+            <div id="logo">
+                    <img src="img/logo2.png" alt="">
+                </div>
+        <header>
+            <h1>Roguelike Portfolio</h1>
+        </header>
+        <nav>
+                <div id="navScroll">
+                    <ul>
+                        <li class="navigation" onclick="naviFunction(0)">O mnie</li>
+                        <li class="navigation" onclick="naviFunction(1)">Technologie</li>
+                        <li class="navigation" onclick="naviFunction(2)">Portfolio</li>
+                        <li class="navigation" onclick="naviFunction(3)">Kontakt</li>
+                        <li  ><a href="">Standardowe Portfolio</a></li>
+ 
+                    </ul>
+                </div>
+            </nav>
+<div id="media">
+    <a href="">
+        <div class="media-icon">
+            <i class="fab fa-github-square fa-3x"></i>
 
-       
-<div id="game">
-    <div id="dungeon" class="layer">
+        </div>
+    </a>
+    <a href="">
+        <div class="media-icon">
+            <i class="fab fa-linkedin fa-3x"></i>
+
+        </div>
+    </a>
+    <a href="">
+        <div class="media-icon">
+            <i class="fab fa-facebook-square fa-3x"></i>
+
+        </div>
+    </a>
+
 </div>
-<div id="wariorLayer" class="layer"> <div id="warior">
-    <img id="wariorImg"src="img/knight/knight iso char_idle_0.png" alt="">
+
+        <div id="game">
+            <div id="dungeon" class="layer">
+            </div>
+            <div id="wariorLayer" class="layer">
+                <div id="warior">
+                    <img id="wariorImg" src="img/knight/knight_stop.png" alt="">
+                </div>
+            </div>
+            <canvas id="shadowLayer" class="layer"></canvas>
+            <div id="topLayerStart" class="layer topLayer">
+                <div id="signs"></div>
+                <div class="smallScroll"></div>
+                <div id="cloud">
+                    <p>W górę "Technologie"</p>
+                    <p>W dół "Portfolio"</p>
+                </div>
+            </div>
+            <div id="topLayerTech" class="layer topLayer">
+                <div id="lewer"></div>
+                <div class="blackblock"></div>
+                <div id="movingBlock" class="techBlock"></div>
+                <div id="html" class="techBlock">
+                    <i class="fab fa-html5 fa-3x"></i>
+                </div>
+                <div id="css" class="techBlock">
+                    <i class="fab fa-css3-alt fa-3x"></i>
+                </div>
+                <div id="js" class="techBlock">
+                    <i class="fab fa-js-square fa-3x"></i>
+                </div>
+                <div id="bs" class="techBlock">
+                    <i class="fab fa-html5 fa-3x"></i>
+                </div>
+                <div id="scrollDesc" class="techBlock"></div>
+                <div class="smallScroll"></div>
+            </div>
+            <div id="topLayerPortfolio" class="layer topLayer">
+                <div class="smallScroll"></div>
+                <div class="special" id="special1"></div>
+                <div class="special" id="special2"></div>
+                <div class="special" id="special3"></div>
+                <div id="left"></div>
+                <div id="portfolioWindow">
+                    <div id="portfolioInline">
+                        <div class="project">
+                            <a href="">
+                                <img src="img/pizza1.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="project">
+                            <a href="">
+                                <img src="img/pizza2.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="project">
+                            <a href="">
+                                <img src="img/pizza3.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="project">
+                            <a href="">
+                                <img src="img/pizza4.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="project">
+                            <a href="">
+                                <img src="img/pizza3.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="right"></div>
+            </div>
+            <div id="topLayerContact" class="layer topLayer">
+                <div id="chest"></div>
+                <div class="smallScroll"></div>
+
+            </div>
+            <div id="loader" class="layer"></div>
+        </div>
+
+        <footer>
+            <p>Wykonane przez JA ©</p>
+        </footer>
+    </div>
+<div id="scrollLayer">
+    <div id="scroll">
+        <div id="text">
+            <div id="cross"></div>
+
+            <div id="startText" class="scrollText">
+                <h1>Witaj na mojej stronie!</h1>
+                <h2>Czy jesteś gotowy na przygodę?</h2>
+                <p> &emsp; Oto strona-portfolio w formie niewielkiego rouge-like'a. Przechodząc przez poszczególne etapy będziesz
+                    mógł zapoznać się ze wszystkimi informacjami jakie wystepują na tego typu stronach w nieco ciekawszej
+                    formie. </p>
+                <h3>Sterowanie:</h3>
+                <p>Ruch: strzałki klawiatury</p>
+                <p>Akcja: Spacja</p>
+                <h2>Powodzenia!</h2>
+
+                <p>PS: Jeśli nie masz czasu lub ochoty na grę, wszystkie informacjie dostępne są również z poziomu menu
+                    <span>powyżej</span>.</p>
+            </div>
+            <div id="About" class="scrollText">
+                <h2>O Mnie</h2>
+                <img src="img/profil.png" alt="">
+                <p> &emsp; Nazywam się
+                    <b>Piotr Pietraszek</b>. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facilis illo velit
+                    sed dignissimos nemo voluptatibus architecto repellat. Eius exercitationem excepturi qui assumenda quos
+                    cum veniam nemo a, iure aut?</p>
+                <div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div id="techText" class="scrollText">
+                <h2>Opanowane technologie</h2>
+                <p>
+                    W tej komnacie możesz sprawdzić jakimi technologiami się posługuję. By to zrobić pociągnij odpowiednią dźwignię. Wielkości
+                    ikon odpowiadają temu jak pewnie czuję się używając danej technologii.
+                </p>
+            </div>
+            <div id="portfolioText" class="scrollText">
+                <h2>Portfolio</h2>
+                <p>
+                    W tej komnacie będziesz mógł przyjrzeć się moim dotychczasowym projektom. Aktywując specjalne pola w konkretnej kolejności.
+                </p>
+            </div>
+            <div id="contactText" class="scrollText">
+                <h2>Kontakt</h2>
+                <p>
+                    Gratulacje! Odnalazłeś zaginniony skarb a w nim formularz i dane kontaktowe. Mam nadzieję, że ta krótka przygoda przypadła
+                    Ci do gustu.
+                    <form action="">
+                        <div>
+                            <div>
+                                <input type="text" placeholder="Imię i Nazwisko">
+                                <input type="email" placeholder="Adres email">
+                                <input type="text" placeholder="Temat">
+                            </div>
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Treść wiadomośći"></textarea>
+                        </div>
+                        <button></button>
+                    </form>
+                </p>
+            </div>
+
+
+
+        </div>
     </div></div>
-<canvas id="shadowLayer" class="layer"></canvas>
-<div id="topLayerStart" class="layer topLayer">
-    <div id="signs"></div>
-    <div id="cloud"><p>W górę "Technologie"</p><p>W dół "Portfolio"</p></div>
-</div>
-<div id="topLayerTech" class="layer topLayer"><div id="lewer"></div>
-<div class="blackblock"></div>
-<div id="movingBlock" class="techBlock"></div>
-<div id="html" class="techBlock"><i class="fab fa-html5 fa-3x" ></i></div>
-<div id="css" class="techBlock"><i class="fab fa-css3-alt fa-3x" ></i></div>
-<div id="js" class="techBlock"><i class="fab fa-js-square fa-3x" ></i></div>
-<div id="bs" class="techBlock"><i class="fab fa-html5 fa-3x" ></i></div>
-</div>
-<div id="loader" class="layer"></div>
-</div>
-<footer><p>Wykonane przez JA ©</p></footer>
-</div>
+
     <script src="js/main.js"></script>
 </body>
+
 </html>

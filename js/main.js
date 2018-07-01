@@ -1,6 +1,7 @@
 
 //statments//
-
+const mainWindow = document.getElementById("main");
+const gameWindow = document.getElementById("game");
 const warior = document.getElementById("warior");
 const wariorImg = document.getElementById("wariorImg");
 const dungeon = document.getElementById("dungeon");
@@ -9,22 +10,42 @@ const navScroll = document.getElementById("navScroll");
 const cross = document.getElementById("cross");
 const signs = document.getElementById("signs");
 const lewer = document.getElementById("lewer");
+const smallScroll = Array.from(document.getElementsByClassName("smallScroll"));
 const cloud = document.getElementById("cloud");
+const arrowLeft = document.getElementById("left");
+const arrowRight = document.getElementById("right");
+const portfolioWindows = document.getElementsByClassName("project");
+const portfolioInline = document.getElementById("portfolioInline");
+const specials = document.getElementsByClassName("special");
 const topLayers = Array.from(document.getElementsByClassName("topLayer"));
 const techBlocks = Array.from(document.getElementsByClassName("techBlock"));
+const scrollText = Array.from(document.getElementsByClassName("scrollText"));
+const navigationLinks = Array.from(document.getElementsByClassName("navigation"));
+const mapMatrix0 = [];
 const mapMatrix1 = [];
 const mapMatrix2 = [];
+const mapMatrix3 = [];
 const animVal = 10;
 const moveScale = 4;
-
+let posMap0Up = 0;
+let posMap0Down = 0;
+let posMap1Down = 0;
+let posMap1Right = 0;
+let posMap2Up = 0;
+let posMap2Right = 0;
+let posMap3Up = 0;
+let posMap3Down = 0;
+let naviCounter = 0;
 let pageNumber = 0;
 let actualMap;
 let windowWidth = document.body.offsetWidth;
-let gameHeight = document.body.offsetHeight;
-let gameWidth = windowWidth * 0.7;
-let gameScale = gameWidth / 1280;
+let gameScale = 1;
 let animStep = 0;
 let navClick = 0;
+let portfolioCounting = 0;
+let portfolioPosition = 0;
+let specialCounter = 0;
+let scrollOpenCounter = 0;
 //main object//
 
 let hero = {
@@ -85,21 +106,30 @@ let hero = {
     }
 
 };
-
+criticalPositionsUpdate = () => {
+    posMap0Up = hero.ySquare < 1 && hero.xSquare > 13;
+    posMap0Down = hero.ySquare > 8 && hero.xSquare > 13;
+    posMap1Down = hero.ySquare > 8 && hero.xSquare > 13;
+    posMap1Right = hero.ySquare < 5 && hero.xSquare > 18;
+    posMap2Up = hero.ySquare < 1 && hero.xSquare > 13;
+    posMap2Right = hero.ySquare < 8 && hero.xSquare > 18;
+    posMap3Up = hero.ySquare < 1 && hero.xSquare > 3;
+    posMap3Down = hero.ySquare > 8 && hero.xSquare > 3;
+};
 scaling = (axis) => {
     if (axis == 'X' && hero.direction == 'left')
-        hero.xSquare = Math.floor(hero.posX / (16 * gameScale));
+        hero.xSquare = Math.floor(hero.posX / (64 * gameScale));
     else if (axis == 'X' && hero.direction == 'right')
-        hero.xSquare = Math.ceil(hero.posX / (16 * gameScale));
+        hero.xSquare = Math.ceil(hero.posX / (64 * gameScale));
 
     if (axis == 'Y' && hero.direction == 'up')
-        hero.ySquare = Math.floor(hero.posY / (16 * gameScale));
+        hero.ySquare = Math.floor(hero.posY / (64 * gameScale));
     else if (axis == 'Y' && hero.direction == 'down')
-        hero.ySquare = Math.ceil(hero.posY / (16 * gameScale));
+        hero.ySquare = Math.ceil(hero.posY / (64 * gameScale));
 
     if (axis == 'init') {
-        hero.xSquare = Math.ceil(hero.posX / (16 * gameScale));
-        hero.ySquare = Math.floor(hero.posY / (16 * gameScale));
+        hero.xSquare = Math.ceil(hero.posX / (64 * gameScale));
+        hero.ySquare = Math.floor(hero.posY / (64 * gameScale));
 
     }
 
@@ -108,23 +138,23 @@ scaling = (axis) => {
 
 animGenerator = () => {
     if (animStep < 2) {
-        wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_0.png`;
+        wariorImg.src = `img/knight/knight_${hero.direction}0.png`;
         animStep++;
     }
     else if (animStep >= 2 && animStep < animVal) {
-        wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_1.png`;
+        wariorImg.src = `img/knight/knight_${hero.direction}1.png`;
         animStep++;
     }
     else if (animStep >= animVal && animStep < animVal * 2) {
-        wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_2.png`;
+        wariorImg.src = `img/knight/knight_${hero.direction}2.png`;
         animStep++;
     }
     else if (animStep >= animVal * 2 && animStep < animVal * 3) {
-        wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_3.png`;
+        wariorImg.src = `img/knight/knight_${hero.direction}3.png`;
         animStep++;
     }
     else if (animStep >= animVal * 3 && animStep < animVal * 4) {
-        wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_4.png`;
+        wariorImg.src = `img/knight/knight_${hero.direction}4.png`;
         animStep++;
     }
     else if (animStep >= animVal * 4 && animStep < animVal * 5) {
@@ -132,7 +162,7 @@ animGenerator = () => {
             animStep = 0;
 
         } else {
-            wariorImg.src = `img/knight/knight iso char_run ${hero.direction}_5.png`;
+            wariorImg.src = `img/knight/knight_${hero.direction}5.png`;
             animStep++;
         }
     }
@@ -186,25 +216,25 @@ moving = (direction) => {
 
     switch (direction) {
         case 1: {
-            hero.posX++;
+            hero.posX += moveScale;
             scaling('X');
             hero.direction = 'right';
             break;
         }
         case 2: {
-            hero.posX--;
+            hero.posX -= moveScale;
             scaling('X');
             hero.direction = 'left';
             break;
         }
         case 3: {
-            hero.posY--;
+            hero.posY -= moveScale;
             scaling('Y');
             hero.direction = 'up';
             break;
         }
         case 4: {
-            hero.posY++;
+            hero.posY += moveScale;
             scaling('Y');
             hero.direction = 'down'
             break
@@ -215,6 +245,7 @@ moving = (direction) => {
     lightObjects();
     cloudsClose();
     console.log(hero.xSquare, hero.ySquare);
+    console.log(portfolioCounting);
 
 };
 
@@ -236,102 +267,398 @@ mapInitialization = (map) => {
 
 };
 mapGeneration = () => {
+    mapInitialization(mapMatrix0);
     mapInitialization(mapMatrix1);
     mapInitialization(mapMatrix2);
-    mapMatrix1.forEach(([xMap, yMap], index) => {
+    mapInitialization(mapMatrix3);
+    mapMatrix0.forEach(([xMap, yMap], index) => {
         if (((yMap == 4 || yMap == 5) && xMap < 15) || (xMap == 14 || xMap == 15))
+            mapMatrix0[index][2] = true;
+    });
+    mapMatrix1.forEach(([xMap, yMap], index) => {
+        if (yMap == 0 || yMap == 9 || xMap == 0 || xMap == 1 || xMap == 18 || xMap == 19)
+            mapMatrix1[index][2] = false;
+        else
             mapMatrix1[index][2] = true;
+        if ((yMap == 9 && (xMap == 14 || xMap == 15)) || ((yMap == 3 || yMap == 4) && (xMap == 18 || xMap == 19)))
+            mapMatrix1[index][2] = true;
+
     });
     mapMatrix2.forEach(([xMap, yMap], index) => {
         if (yMap == 0 || yMap == 9 || xMap == 0 || xMap == 1 || xMap == 18 || xMap == 19)
             mapMatrix2[index][2] = false;
         else
             mapMatrix2[index][2] = true;
-        if ((yMap == 9 && (xMap == 14 || xMap == 15)) || ((yMap == 3 || yMap == 4) && (xMap == 18 || xMap == 19)))
+        if ((yMap == 0 && (xMap == 14 || xMap == 15)) || ((yMap == 6 || yMap == 7) && (xMap == 18 || xMap == 19)))
             mapMatrix2[index][2] = true;
 
     });
+    mapMatrix3.forEach(([xMap, yMap], index) => {
+        if (yMap == 0 || yMap == 9 || xMap == 0 || xMap == 1 || xMap == 18 || xMap == 19)
+            mapMatrix3[index][2] = false;
+        else
+            mapMatrix3[index][2] = true;
+        if ((yMap == 0 || yMap == 9) && (xMap == 4 || xMap == 5))
+            mapMatrix3[index][2] = true;
+
+    });
 };
-mapChosing = () => {
+mapChosing = (i) => {
+    document.getElementById('loader').classList.add('loader');
     switch (pageNumber) {
         case 0: {
-            actualMap = mapMatrix1;
+            actualMap = mapMatrix0;
             break
         }
         case 1: {
+            actualMap = mapMatrix1;
+            break
+        }
+        case 2: {
             actualMap = mapMatrix2;
             break
         }
+        case 3: {
+            actualMap = mapMatrix3;
+            break
+
+        }
     }
+    if (i != 0)
+        // setTimeout(() => { mapEdit(), shadow(0) }, 500);
+        mapEdit();
+    // shadow(0);
 };
 
 
 mapDrawing = () => {
+
     actualMap.forEach(([], index) => {
         const brick = document.createElement("img");
         brick.id = `brick${index}`;
         if (actualMap[index][2] == true)
-            brick.src = "img/bricks/bricks64black.png";
+            brick.src = "img/bricks/brick1.png";
         else
-            brick.src = "img/bricks/bricks64.png";
+            brick.src = "img/bricks/brick2.png";
         dungeon.appendChild(brick);
         brick.style.position = "relative";
         brick.style.width = `${64 * gameScale}px`;
         brick.style.height = `${64 * gameScale}px`;
     });
-   
+
 };
 mapEdit = () => {
     actualMap.forEach(([], index) => {
         const brick = document.getElementById(`brick${index}`);
         if (actualMap[index][2] == true)
-            brick.src = "img/bricks/bricks64black.png";
+            brick.src = "img/bricks/brick1.png";
         else
-            brick.src = "img/bricks/bricks64.png";
+            brick.src = "img/bricks/brick2.png";
     });
-    if(actualMap == mapMatrix2){
-        warior.style.left = `${64 * gameScale*15}px`;
-        warior.style.top = `${64 * gameScale * 8}px`;
-    
-    hero.posX = parseInt(warior.style.left, 10) / moveScale;
-    hero.posY = parseInt(warior.style.top, 10) / moveScale;
-    scaling('init');
-    topLayers.forEach((topLayer,index)=>{
+    wariorPositioning = (mapNumber) => {
+        hero.posX = parseInt(warior.style.left, 10);
+        hero.posY = parseInt(warior.style.top, 10);
+        scaling('init');
+        topLayers.forEach((topLayer, index) => {
 
-        if(index == 1)
-        topLayer.style.visibility = "visible";
-        else
-        topLayer.style.visibility = "hidden";
-    })
-}
+            if (index == mapNumber)
+                topLayer.style.display = "flex";
+            else
+                topLayer.style.display = "none";
+        });
+    };
+    if (pageNumber == 0 && posMap1Down) {
+        document.getElementById('shadowLayer').style.visibility = 'visible';
+        warior.style.left = `${64 * gameScale * 14.5}px`;
+        warior.style.top = `${64 * gameScale * 0.5}px`;
+    }
+    else if (pageNumber == 0 && posMap2Up) {
+        warior.style.left = `${64 * gameScale * 14.5}px`;
+        warior.style.top = `${64 * gameScale * 9}px`;
+    }
+    else if (pageNumber == 1 && posMap0Up) {
+        warior.style.left = `${64 * gameScale * 14.5}px`;
+        warior.style.top = `${64 * gameScale * 9}px`;
+    }
+    else if (pageNumber == 1 && posMap3Up) {
+        warior.style.left = `${64 * gameScale * 19}px`;
+        warior.style.top = `${64 * gameScale * 3.5}px`;
+    }
+    else if (pageNumber == 2 && posMap0Down) {
+        warior.style.left = `${64 * gameScale * 14.5}px`;
+        warior.style.top = `${64 * gameScale * 0}px`;
+    }
+    else if (pageNumber == 2 && posMap3Down) {
+        warior.style.left = `${64 * gameScale * 19}px`;
+        warior.style.top = `${64 * gameScale * 6.5}px`;
+    }
+
+    else if (pageNumber == 3 && posMap1Right) {
+        warior.style.left = `${64 * gameScale * 4.5}px`;
+        warior.style.top = `${64 * gameScale * 0}px`;
+    }
+    else if (pageNumber == 3 && posMap2Right) {
+        warior.style.left = `${64 * gameScale * 4.5}px`;
+        warior.style.top = `${64 * gameScale * 9}px`;
+    }
+    wariorPositioning(pageNumber);
+    shadow(1);
 };
 
 //Actions//
+naviFunction = (n) => {
+    console.log(n);
+    document.getElementById('shadowLayer').style.visibility = 'hidden';
+    pageNumber = n;
+    switch (n) {
+        case 0: {
+            warior.style.left = `${64 * gameScale * 12}px`;
+            warior.style.top = `${64 * gameScale * 4.5}px`;
+            mapChosing(1);
+            // przy pozycji zmiany mapy nie przenosi w odpowiednie miejsca//
+            scrollOpen(0);
+            scrollOpenCounter = 1;
+            break
+        }
+        case 1: {
+
+            warior.style.left = `${64 * gameScale * 2}px`;
+            warior.style.top = `${64 * gameScale * 5}px`;
+            mapChosing(1);
+            technicActivation();
+            break
+        }
+        case 2: {
+            warior.style.left = `${64 * gameScale * 2}px`;
+            warior.style.top = `${64 * gameScale * 5}px`;
+            specialCounter = 3;
+            mapChosing(1);
+            portfolioActivation();
+            break
+        }
+        case 3: {
+            warior.style.left = `${64 * gameScale * 15}px`;
+            warior.style.top = `${64 * gameScale * 5}px`;
+            mapChosing(1);
+            chest();
+            scrollOpen(0);
+            scrollOpenCounter = 1;
+            break
+        }
+    }
+}
+
 lightObjects = () => {
-    if (hero.xSquare == 15 && hero.ySquare == 4 && actualMap == mapMatrix1)
+    criticalPositionsUpdate();
+    if ((11 < hero.xSquare && hero.xSquare < 13) &&
+        (3 < hero.ySquare && hero.ySquare < 6))
+        smallScroll[0].classList.add("light");
+    else
+        smallScroll[0].classList.remove("light");
+
+    if (hero.xSquare == 15 && hero.ySquare == 4 && pageNumber == 0)
         signs.classList.add("light");
     else
         signs.classList.remove("light");
-
-    if (hero.xSquare == 1 && hero.ySquare == 4 && actualMap == mapMatrix2)
+    if (hero.xSquare < 3 && hero.ySquare > 3 && hero.ySquare < 6 && pageNumber == 1)
         lewer.classList.add("light");
     else
         lewer.classList.remove("light");
+
+    if ((13 < hero.xSquare && hero.xSquare < 16) &&
+        (5 < hero.ySquare && hero.ySquare < 9))
+        smallScroll[1].classList.add("light");
+    else
+        smallScroll[1].classList.remove("light");
+
+    if ((13 < hero.xSquare && hero.xSquare < 16) &&
+        (0 < hero.ySquare && hero.ySquare < 3))
+        smallScroll[2].classList.add("light");
+    else
+        smallScroll[2].classList.remove("light");
+    if ((12 < hero.xSquare && hero.xSquare < 16) &&
+        (3 < hero.ySquare && hero.ySquare < 6) && pageNumber == 3)
+        smallScroll[3].classList.add("light");
+    else
+        smallScroll[3].classList.remove("light");
+    if ((14 < hero.xSquare && hero.xSquare < 17) &&
+        (3 < hero.ySquare && hero.ySquare < 6) && pageNumber == 3) {
+        document.getElementById('chest').classList.add("light");
+    }
+    else
+        document.getElementById('chest').classList.remove("light");
+
+    console.log(posMap0Up);
+    if (posMap0Up && (pageNumber == 0 || pageNumber == 2)) {
+        document.getElementById("brick14").src = "img/bricks/brickLightUp.png";
+        document.getElementById("brick15").src = "img/bricks/brickLightUp.png";
+    }
+    else if (pageNumber == 0 || pageNumber == 2) {
+        document.getElementById("brick14").src = "img/bricks/brick1.png";
+        document.getElementById("brick15").src = "img/bricks/brick1.png";
+    }
+
+    if (posMap1Down && (pageNumber == 0 || pageNumber == 1)) {
+        document.getElementById("brick194").src = "img/bricks/brickLightDown.png";
+        document.getElementById("brick195").src = "img/bricks/brickLightDown.png";
+    }
+    else if (pageNumber == 0 || pageNumber == 1) {
+        document.getElementById("brick194").src = "img/bricks/brick1.png";
+        document.getElementById("brick195").src = "img/bricks/brick1.png";
+    }
+    if (posMap1Right && pageNumber == 1) {
+        document.getElementById("brick79").src = "img/bricks/brickLightRight.png";
+        document.getElementById("brick99").src = "img/bricks/brickLightRight.png";
+    }
+    else if (pageNumber == 1) {
+        document.getElementById("brick79").src = "img/bricks/brick1.png";
+        document.getElementById("brick99").src = "img/bricks/brick1.png";
+    }
+    if (posMap2Right && pageNumber == 2) {
+        document.getElementById("brick139").src = "img/bricks/brickLightRight.png";
+        document.getElementById("brick159").src = "img/bricks/brickLightRight.png";
+    }
+    else if (pageNumber == 2) {
+        document.getElementById("brick139").src = "img/bricks/brick1.png";
+        document.getElementById("brick159").src = "img/bricks/brick1.png";
+    }
+    if (posMap3Up && pageNumber == 3) {
+        document.getElementById("brick4").src = "img/bricks/brickLightUp.png";
+        document.getElementById("brick5").src = "img/bricks/brickLightUp.png";
+    }
+    else if (pageNumber == 3) {
+        document.getElementById("brick4").src = "img/bricks/brick1.png";
+        document.getElementById("brick5").src = "img/bricks/brick1.png";
+    }
+    if (posMap3Down && pageNumber == 3) {
+        document.getElementById("brick184").src = "img/bricks/brickLightDown.png";
+        document.getElementById("brick185").src = "img/bricks/brickLightDown.png";
+    }
+    else if (pageNumber == 3) {
+        document.getElementById("brick184").src = "img/bricks/brick1.png";
+        document.getElementById("brick185").src = "img/bricks/brick1.png";
+    }
 }
-cloudsClose = ()=>{
-    if ((hero.xSquare != 15 || hero.ySquare != 4) && actualMap == mapMatrix1)
-    cloud.style.visibility = "hidden";
+cloudsClose = () => {
+    if ((hero.xSquare != 15 || hero.ySquare != 4) && actualMap == mapMatrix0)
+        cloud.style.visibility = "hidden";
+}
+scrollOpen = (n) => {
+    document.getElementById('text').style.display = "flex";
+    opening = () => {
+        scroll.style.display = "initial";
+        mainWindow.style.filter = "blur(15px)";
+        scrollText.forEach((elem, index) => {
+            if (index == pageNumber + 1 - n)
+                elem.style.display = "initial";
+            else
+                elem.style.display = "none";
+
+        });
+    }
+    if ((11 < hero.xSquare && hero.xSquare < 13) &&
+        (3 < hero.ySquare && hero.ySquare < 6) &&
+        pageNumber == 0) {
+        opening();
+    }
+    if ((13 < hero.xSquare && hero.xSquare < 16) &&
+        (5 < hero.ySquare && hero.ySquare < 9) &&
+        pageNumber == 1) {
+        opening();
+
+    }
+    if ((13 < hero.xSquare && hero.xSquare < 16) &&
+        (0 < hero.ySquare && hero.ySquare < 3) &&
+        pageNumber == 2) {
+        opening();
 
 
+    }
+    if ((12 < hero.xSquare && hero.xSquare < 16) &&
+        (3 < hero.ySquare && hero.ySquare < 6) && pageNumber == 3) {
+        opening();
+    }
+    if (n == 1) {
+        scrollOpenCounter = 1;
+        opening();
+    }
+}
+portfolioRight = () => {
+    console.log(portfolioPosition);
+    if (portfolioCounting >= 4) {
+        portfolioCounting = 0;
+        portfolioPosition = 0;
+        portfolioInline.style.left = `${portfolioPosition}px`;
+    }
+    else {
+        portfolioCounting++;
+        portfolioPosition -= 480;
+        portfolioInline.style.left = `${portfolioPosition}px`;
+    }
+}
+portfolioLeft = () => {
+    if (portfolioCounting <= 0) {
+        portfolioCounting = 4;
+        portfolioPosition = -1920;
+        portfolioInline.style.left = `${portfolioPosition}px`;
+    }
+    else {
+        portfolioCounting--;
+        portfolioPosition += 480;
+        portfolioInline.style.left = `${portfolioPosition}px`;
+    }
+}
+technicActivation = () => {
+    if (hero.xSquare < 3 && hero.ySquare > 3 && hero.ySquare < 6 && pageNumber == 1) {
+        lewer.classList.remove("light");
+        lewer.classList.add("down");
+        document.getElementById('shadowLayer').style.visibility = 'hidden';
+        techBlocks.forEach((techBlock, index) => {
+            techBlock.classList.add("move");
+
+        })
+
+    }
+
+};
+portfolioActivation = () => {
+
+    if (hero.xSquare == 3 && hero.ySquare == 3 && specialCounter == 0) {
+        Array.from(specials)[0].classList.add('light');
+        specialCounter++;
+    }
+    else if (hero.xSquare == 3 && hero.ySquare == 5 && specialCounter == 1) {
+        Array.from(specials)[1].classList.add('light');
+        specialCounter++;
+    }
+    else if (hero.xSquare == 3 && hero.ySquare == 7 && specialCounter == 2) {
+        Array.from(specials)[2].classList.add('light');
+        specialCounter++;
+    }
+
+    if (specialCounter == 3) {
+        document.getElementById('shadowLayer').style.visibility = 'hidden';
+        portfolioInline.style.visibility = 'initial';
+        arrowLeft.style.visibility = 'initial';
+        arrowRight.style.visibility = 'initial';
+    }
+}
+chest = () => {
+    smallScroll[3].classList.add('throw');
+    document.getElementById("chest").classList.add("open");
 }
 //Initialization//
+
+// miganie poświaty przez "ładowanie" kolejnego ekranu
 shadow = (init) => {
 
     const wariorLayer = document.getElementById('shadowLayer');
     const wariorLayerContext = wariorLayer.getContext("2d");
+    const shadowScalex = 300 / 1280;
+    const shadowScaleY = 150 / 640;
     console.log(hero.posX, hero.posY);
-    let gradient = wariorLayerContext.createRadialGradient((hero.posX + 6) * 1.2, (hero.posY + 6) * 1.2, 30, (hero.posX + 6) * 1.2, (hero.posY + 6) * 1.2, 50);
-    console.log(hero.posX, hero.posY);
+    let gradient = wariorLayerContext.createRadialGradient(hero.posX * shadowScalex, hero.posY * shadowScaleY, 30, hero.posX * shadowScalex, hero.posY * shadowScaleY, 50);
+    console.log(hero.posX / shadowScalex, hero.posY / shadowScaleY);
     gradient.addColorStop(0, "rgba(194, 168, 120, 0.027)");
     gradient.addColorStop(1, "rgba(0,0,0,1)");
     wariorLayerContext.fillStyle = gradient;
@@ -351,42 +678,54 @@ shadow = (init) => {
 
 };
 initialValues = () => {
+    resize();
     mapGeneration();
-    mapChosing();
+    mapChosing(0);
     mapDrawing();
     warior.style.left = `${64 * gameScale}px`;
     warior.style.top = `${64 * gameScale * 4.5}px`;
-    hero.posX = parseInt(warior.style.left, 10) / moveScale;
-    hero.posY = parseInt(warior.style.top, 10) / moveScale;
+    hero.posX = parseInt(warior.style.left, 10);
+    hero.posY = parseInt(warior.style.top, 10);
     scaling('init');
+    shadow(0);
     const layers = document.getElementsByClassName("layer");
     Array.from(layers).forEach((layer) => {
         layer.style.height = `${640 * gameScale}px`;
     });
     warior.style.transform = `scale(${gameScale}, ${gameScale})`;
     console.log(hero.posX, hero.posY);
-    shadow(0);
-    topLayers.forEach((topLayer,index)=>{
+    topLayers.forEach((topLayer, index) => {
 
-        if(index == 0)
-        topLayer.style.visibility = "visible";
+        if (index == 0)
+            topLayer.style.display = "initial";
         else
-        topLayer.style.visibility = "hidden";
+            topLayer.style.display = "none";
     })
+    scrollOpen(1);
 };
+
+resize = () => {
+    let windowScale =(windowWidth / 1600);
+    gameWindow.style.transform = `scale(${windowScale}, ${windowScale})`;
+    scroll.style.transform =  `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
+    // gameScale = document.body.offsetWidth / 1280;
+    console.log('ss');
+}
 
 // Interface  //
 
-scrollAnimation = () => {
-    scroll.classList.add("scroll");
-    Array.from(document.getElementsByClassName('text'))[0].style.visibility = "initial";
+// scrollAnimation = () => {
+//     scroll.classList.add("scroll");
+//     Array.from(document.getElementsByClassName('text'))[0].style.visibility = "initial";
+//     scrollText[0].style.display = "initial";
 
-}
+// }
 scrollClosing = () => {
     scroll.style.display = "none";
+    document.getElementById('text').style.display = "none";
     document.getElementById("main").style.filter = "none";
 }
-menuOpen = () => {
+menuOpen = (event) => {
     switch (navClick) {
         case 0: {
             navScroll.classList.add("navOpen");
@@ -402,81 +741,114 @@ menuOpen = () => {
             break;
         }
     }
+    event.stopPropagation();
+
 }
 
 // Key handling //
 
 function checkKeyDown(key) {
-    document.getElementById('loader').classList.remove('loader');
+    // document.getElementById('loader').classList.remove('loader');
     key = key || window.event;
 
     if (key.keyCode == '38') {
         // up aryMap
         hero.moveUp();
-        warior.style.top = (`${hero.posY * 4}px`);
+        warior.style.top = (`${hero.posY}px`);
         console.log(Array.from(navScroll.classList))
 
     }
     else if (key.keyCode == '40') {
         // down aryMap
         hero.moveDown();
-        warior.style.top = (`${hero.posY * 4}px`);
+        warior.style.top = (`${hero.posY}px`);
     }
     else if (key.keyCode == '37') {
         // left aryMap
         hero.moveLeft();
-        warior.style.left = (`${hero.posX * 4}px`);
+        warior.style.left = (`${hero.posX}px`);
     }
     else if (key.keyCode == '39') {
         // right aryMap
         hero.moveRight();
-        warior.style.left = (`${hero.posX * 4}px`);
+        warior.style.left = (`${hero.posX}px`);
     }
     else if (key.keyCode == '32') {
         //space
-        if (hero.xSquare == 15 && hero.ySquare == 4 && actualMap == mapMatrix1){
+        if (hero.xSquare == 15 && hero.ySquare == 4 && pageNumber == 0) {
             cloud.style.visibility = "visible";
-            cloud.style.left = (`${(hero.posX * 4)-120}px`);
-            cloud.style.top = (`${(hero.posY * 4)-200}px`);
+            cloud.style.left = (`${(hero.posX) - 120}px`);
+            cloud.style.top = (`${(hero.posY) - 150}px`);
         }
 
-        if (hero.xSquare == 1 && hero.ySquare == 4 && actualMap == mapMatrix2){
-            lewer.classList.remove("light");
-            lewer.classList.add("down");
-            document.getElementById('shadowLayer').style.visibility = 'hidden';
-            techBlocks.forEach((techBlock, index)=>{
-                techBlock.classList.add("move");
+        technicActivation();
 
-            })
-    
+        if (scrollOpenCounter == 1) {
+            scrollClosing();
         }
-            if (hero.ySquare < 1 && hero.xSquare == 15 && actualMap ==mapMatrix1) {
-                document.getElementById('loader').classList.add('loader');
-                pageNumber = 1;
-                actualMap = mapMatrix2;
+        if (scrollOpenCounter == 0) {
+            scrollOpen(0);
+        }
+        if (scroll.style.display == "none")
+            scrollOpenCounter = 0;
+        else
+            scrollOpenCounter = 1;
 
-                setTimeout(() => {  mapEdit(), shadow(0)}, 500);
-            };
+        if ((14 < hero.xSquare && hero.xSquare < 17) &&
+            (3 < hero.ySquare && hero.ySquare < 6) && pageNumber == 3) {
+            chest();
+
+        }
+        if ((posMap1Down && pageNumber == 1) ||
+            (posMap2Up && pageNumber == 2)) {
+            pageNumber = 0;
+            mapChosing(1);
+            console.log(pageNumber);
+        }
+        else if ((posMap0Up && pageNumber == 0) ||
+            (posMap3Up && pageNumber == 3)) {
+            pageNumber = 1;
+            mapChosing(1);
+        }
+        else if ((posMap0Down && pageNumber == 0) ||
+            (posMap3Down && pageNumber == 3)) {
+            pageNumber = 2;
+            mapChosing(1);
+            console.log(pageNumber);
+        }
+        else if ((posMap1Right && pageNumber == 1) ||
+            (posMap2Right && pageNumber == 2)) {
+            pageNumber = 3;
+            mapChosing(1);
+        };
+        portfolioActivation();
 
     };
 
 };
 
-function checkKeyUp(key) {
+checkKeyUp = (key) => {
     key = key || window.event;
     hero.move = false;
     if (hero.move === false) {
         animStep = 0;
-        wariorImg.src = 'img/knight/knight iso char_idle_0.png';
+        wariorImg.src = 'img/knight/knight_stop.png';
     };
 };
-window.onload = scrollAnimation();
 window.onload = initialValues;
 // document.getElementsByTagName("BODY")[0] = initialValues;
-// document.addEventListener("resize", initialValues());
+// window.addEventListener("resize", resize);
 document.onkeyup = checkKeyUp;
 document.onkeydown = checkKeyDown;
 navScroll.addEventListener("click", menuOpen);
+document.body.addEventListener("click", () => {
+    if (navClick == 1) {
+        navScroll.classList.remove("navOpen");
+        navClick = 0;
+    }
+})
 cross.addEventListener("click", scrollClosing);
+arrowLeft.addEventListener("click", portfolioLeft);
+arrowRight.addEventListener("click", portfolioRight);
 // document.addEventListener("click", menuClose);
 
