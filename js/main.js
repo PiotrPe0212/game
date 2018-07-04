@@ -7,6 +7,7 @@ const wariorImg = document.getElementById("wariorImg");
 const dungeon = document.getElementById("dungeon");
 const scroll = document.getElementById("scroll");
 const navScroll = document.getElementById("navScroll");
+const scrollLayer = document.getElementById("scrollLayer");
 const cross = document.getElementById("cross");
 const signs = document.getElementById("signs");
 const lewer = document.getElementById("lewer");
@@ -544,7 +545,7 @@ cloudsClose = () => {
         cloud.style.visibility = "hidden";
 }
 scrollOpen = (n) => {
-    document.getElementById('text').style.display = "flex";
+    scrollLayer.style.display = "flex";
     opening = () => {
         scroll.style.display = "initial";
         mainWindow.style.filter = "blur(15px)";
@@ -722,7 +723,7 @@ resize = () => {
 // }
 scrollClosing = () => {
     scroll.style.display = "none";
-    document.getElementById('text').style.display = "none";
+    scrollLayer.style.display = "none";
     document.getElementById("main").style.filter = "none";
 }
 menuOpen = (event) => {
