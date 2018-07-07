@@ -246,7 +246,6 @@ moving = (direction) => {
     lightObjects();
     cloudsClose();
     console.log(hero.xSquare, hero.ySquare);
-    console.log(portfolioCounting);
 
 };
 
@@ -706,25 +705,18 @@ initialValues = () => {
 };
 
 resize = () => {
-    let windowScale =(windowWidth / 1600);
+    let windowScale = (windowWidth / 1600);
     gameWindow.style.transform = `scale(${windowScale}, ${windowScale})`;
-    scroll.style.transform =  `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
+    scroll.style.transform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
     // gameScale = document.body.offsetWidth / 1280;
     console.log('ss');
 }
 
-// Interface  //
-
-// scrollAnimation = () => {
-//     scroll.classList.add("scroll");
-//     Array.from(document.getElementsByClassName('text'))[0].style.visibility = "initial";
-//     scrollText[0].style.display = "initial";
-
-// }
 scrollClosing = () => {
     scroll.style.display = "none";
     scrollLayer.style.display = "none";
     document.getElementById("main").style.filter = "none";
+    scrollOpenCounter = 0;
 }
 menuOpen = (event) => {
     switch (navClick) {
@@ -782,18 +774,14 @@ function checkKeyDown(key) {
             cloud.style.top = (`${(hero.posY) - 150}px`);
         }
 
-        technicActivation();
-
+        technicActivation();;
         if (scrollOpenCounter == 1) {
             scrollClosing();
         }
-        if (scrollOpenCounter == 0) {
+        else if (scrollOpenCounter == 0) {
             scrollOpen(0);
-        }
-        if (scroll.style.display == "none")
-            scrollOpenCounter = 0;
-        else
             scrollOpenCounter = 1;
+        }
 
         if ((14 < hero.xSquare && hero.xSquare < 17) &&
             (3 < hero.ySquare && hero.ySquare < 6) && pageNumber == 3) {
