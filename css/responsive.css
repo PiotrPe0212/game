@@ -2,18 +2,11 @@
     #navScroll {
         transform: scale(0.75, 0.75);
     }
-    #logo {
-        transform: scale(0.25, 0.25);
-        top: -100px;
-        left: -80px;
-    }
+  
 }
 
 @media all and (max-width: 640px) {
-    #logo {
-        transform: scale(0.1, 0.1);
-        left: -110px;
-    }
+    
     nav {
         position: absolute;
         height: 100%;

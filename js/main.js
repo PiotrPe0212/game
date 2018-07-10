@@ -325,9 +325,7 @@ mapChosing = (i) => {
         }
     }
     if (i != 0)
-        // setTimeout(() => { mapEdit(), shadow(0) }, 500);
         mapEdit();
-    // shadow(0);
 };
 
 
@@ -415,7 +413,6 @@ naviFunction = (n) => {
             warior.style.left = `${64 * gameScale * 12}px`;
             warior.style.top = `${64 * gameScale * 4.5}px`;
             mapChosing(1);
-            // przy pozycji zmiany mapy nie przenosi w odpowiednie miejsca//
             scrollOpen(0);
             scrollOpenCounter = 1;
             break
@@ -649,7 +646,7 @@ chest = () => {
 }
 //Initialization//
 
-// miganie poświaty przez "ładowanie" kolejnego ekranu
+
 shadow = (init) => {
 
     const wariorLayer = document.getElementById('shadowLayer');
@@ -708,7 +705,6 @@ resize = () => {
     let windowScale = (windowWidth / 1600);
     gameWindow.style.transform = `scale(${windowScale}, ${windowScale})`;
     scroll.style.transform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
-    // gameScale = document.body.offsetWidth / 1280;
     console.log('ss');
 }
 
@@ -741,7 +737,7 @@ menuOpen = (event) => {
 // Key handling //
 
 function checkKeyDown(key) {
-    // document.getElementById('loader').classList.remove('loader');
+ 
     key = key || window.event;
 
     if (key.keyCode == '38') {
@@ -825,8 +821,6 @@ checkKeyUp = (key) => {
     };
 };
 window.onload = initialValues;
-// document.getElementsByTagName("BODY")[0] = initialValues;
-// window.addEventListener("resize", resize);
 document.onkeyup = checkKeyUp;
 document.onkeydown = checkKeyDown;
 navScroll.addEventListener("click", menuOpen);
@@ -839,5 +833,5 @@ document.body.addEventListener("click", () => {
 cross.addEventListener("click", scrollClosing);
 arrowLeft.addEventListener("click", portfolioLeft);
 arrowRight.addEventListener("click", portfolioRight);
-// document.addEventListener("click", menuClose);
+
 
