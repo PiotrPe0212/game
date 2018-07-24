@@ -243,6 +243,7 @@ div#scroll {
 .scrollText{
     display: none;
 }
+.scrollText h3,
 .scrollText h2,
 .scrollText h1 {
     text-align: center;
