@@ -257,23 +257,27 @@ div#scroll {
 .scrollText a:hover {
     color: rgb(156, 156, 158);
 }
-
+#contactText>p{
+    margin: 10px 0 0 0;
+}
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* height: 40%; */
 }
 
 form>div:first-of-type {
     display: flex;
     flex-direction: row;
     align-items: center;
+    
 }
 
 form>div:first-of-type>div {
     display: flex;
     flex-direction: column;
-    height: 30vh;
+    /* height: 50%; */
     justify-content: space-between;
 }
 
@@ -297,11 +301,11 @@ input {
 
 textarea {
     padding: 10px;
-    height: 30vh;
+    /* height: 100%; */
 }
 
 button {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 64px;
     height: 64px;
     background-color: transparent;
