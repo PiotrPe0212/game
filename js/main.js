@@ -672,7 +672,10 @@ resize = () => {
     let windowScale = (windowWidth / 1600);
     gameWindow.style.transform = `scale(${windowScale}, ${windowScale})`;
     scroll.style.transform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
-    console.log('ss');
+    scroll.style.webkitTransform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
+    scroll.style.MozTransform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
+    scroll.style.msTransform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
+    scroll.style.oTransform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
 }
 
 scrollClosing = () => {

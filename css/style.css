@@ -10,23 +10,46 @@ h3 {
     margin: 0;
     padding: 0;
 }
-
+p{
+    margin: 15px 0 0 10px;
+}
 .topLayer {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 #main {
     width: 100vw;
     height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    filter: blur(15px);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-filter: blur(15px);
+            filter: blur(15px);
+    -webkit-transition: -webkit-filter 0.2s linear;
+    transition: -webkit-filter 0.2s linear;
+    -o-transition: filter 0.2s linear;
     transition: filter 0.2s linear;
+    transition: filter 0.2s linear, -webkit-filter 0.2s linear;
     overflow: hidden;
+    -ms-overflow-style: hidden;
 }
 
 #dungeon {
@@ -36,20 +59,38 @@ h3 {
 #game {
     width: 1280px;
     height: 640px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 header {
     width: 100vw;
     height: 12vh;
     background-color: rgb(236, 240, 250);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 header h1 {
@@ -130,9 +171,16 @@ nav ul>li>a:hover {
 #media {
     position: absolute;
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     left: 0;
     z-index: 100;
 }
@@ -152,9 +200,15 @@ nav ul>li>a:hover {
     position: absolute;
     left: 0;
     top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 div#scroll {
@@ -171,8 +225,13 @@ div#scroll {
     margin-top: 30px;
     width: 600px;
     height: 520px;
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #text>div:first-child {
@@ -204,10 +263,18 @@ div#scroll {
 #About>div:first-of-type {
     margin-top: 50px;
     height: 32px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #About>div:first-of-type div {
@@ -225,15 +292,29 @@ div#scroll {
 }
 
 #techText div:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #techText div:first-of-type div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #techText div:first-of-type div img {
@@ -261,24 +342,45 @@ div#scroll {
     margin: 10px 0 0 0;
 }
 form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* height: 40%; */
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 form>div:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+            height: 25vh;
     
 }
 
 form>div:first-of-type>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    /* height: 50%; */
-    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+            height: 100%;
 }
 
 input,
@@ -287,6 +389,7 @@ textarea {
     background-color: rgba(100, 72, 12, 0.75);
     font-family: 'Merienda', cursive;
     outline: none;
+    width: 20vw;
 }
 
 input:focus,
@@ -301,7 +404,7 @@ input {
 
 textarea {
     padding: 10px;
-    /* height: 100%; */
+    height: 25vh;
 }
 
 button {
@@ -322,9 +425,15 @@ button:hover {
 
 #warior {
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 64px;
     height: 64px;
     z-index: 120;
@@ -351,6 +460,12 @@ button:hover {
     top: 280px;
     left: 970px;
     transform: scale(1.25, 1.25);
+    -webkit-transform: scale(1.25, 1.25);
+        -moz-transform: scale(1.25, 1.25);
+        -ms-transform: scale(1.25, 1.25);
+        -o-transform: scale(1.25, 1.25);
+;
+
 }
 
 #topLayerStart #signs.light {
@@ -369,10 +484,26 @@ button:hover {
     left: 0;
     visibility: hidden;
     transform: scale(1.5, 1.5);
+    -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #cloud p {
@@ -391,6 +522,11 @@ button:hover {
     top: 290px;
     left: 100px;
     transform: scale(0.7, 0.7);
+    -webkit-transform: scale(0.7, 0.7);
+        -moz-transform: scale(0.7, 0.7);
+        -ms-transform: scale(0.7, 0.7);
+        -o-transform: scale(0.7, 0.7);
+
 }
 
 #topLayerTech #lewer.light {
@@ -428,9 +564,15 @@ button:hover {
 #sass,
 #gulp {
     background-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     visibility: hidden;
     border: 1px solid transparent;
     border-radius: 5px;
@@ -448,43 +590,80 @@ button:hover {
 }
 
 #html.move {
-    animation: MoveHtml 0.5s ease both;
-    animation-delay: 0.5s;
+    -webkit-animation: MoveHtml 0.5s ease both;
+            animation: MoveHtml 0.5s ease both;
+    -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
 }
 
 #css.move {
-    animation: MoveCss 0.5s ease both;
-    animation-delay: 1s;
+    -webkit-animation: MoveCss 0.5s ease both;
+            animation: MoveCss 0.5s ease both;
+    -webkit-animation-delay: 1s;
+            animation-delay: 1s;
 }
 
 #js.move {
-    animation: MoveJs 0.5s ease both;
-    animation-delay: 1.5s;
+    -webkit-animation: MoveJs 0.5s ease both;
+            animation: MoveJs 0.5s ease both;
+    -webkit-animation-delay: 1.5s;
+            animation-delay: 1.5s;
 }
 
 #git.move {
-    animation: MoveGit 0.5s ease both;
-    animation-delay: 2s;
+    -webkit-animation: MoveGit 0.5s ease both;
+            animation: MoveGit 0.5s ease both;
+    -webkit-animation-delay: 2s;
+            animation-delay: 2s;
 }
 
 #jq.move {
-    animation: MoveJq 0.5s ease both;
-    animation-delay: 2.5s;
+    -webkit-animation: MoveJq 0.5s ease both;
+            animation: MoveJq 0.5s ease both;
+    -webkit-animation-delay: 2.5s;
+            animation-delay: 2.5s;
 }
 
 #bs.move {
-    animation: MoveBs 0.5s ease both;
-    animation-delay: 3s;
+    -webkit-animation: MoveBs 0.5s ease both;
+            animation: MoveBs 0.5s ease both;
+    -webkit-animation-delay: 3s;
+            animation-delay: 3s;
 }
 
 #sass.move {
-    animation: MoveSass 0.5s ease both;
-    animation-delay: 3.5s;
+    -webkit-animation: MoveSass 0.5s ease both;
+            animation: MoveSass 0.5s ease both;
+    -webkit-animation-delay: 3.5s;
+            animation-delay: 3.5s;
 }
 
 #gulp.move {
-    animation: MoveGulp 0.5s ease both;
-    animation-delay: 4s;
+    -webkit-animation: MoveGulp 0.5s ease both;
+            animation: MoveGulp 0.5s ease both;
+    -webkit-animation-delay: 4s;
+            animation-delay: 4s;
+}
+
+@-webkit-keyframes MoveHtml {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 300px;
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    }
 }
 
 @keyframes MoveHtml {
@@ -500,6 +679,32 @@ button:hover {
         top: 200px;
         left: 300px;
         transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    }
+}
+
+@-webkit-keyframes MoveCss {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 400px;
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
     }
 }
 
@@ -516,6 +721,32 @@ button:hover {
         top: 200px;
         left: 400px;
         transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    }
+}
+
+@-webkit-keyframes MoveJs {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 500px;
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
     }
 }
 
@@ -532,6 +763,32 @@ button:hover {
         top: 200px;
         left: 500px;
         transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    }
+}
+
+@-webkit-keyframes MoveGit {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 200px;
+        left: 448px;
+    }
+    100% {
+        top: 200px;
+        left: 600px;
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
     }
 }
 
@@ -548,6 +805,32 @@ button:hover {
         top: 200px;
         left: 600px;
         transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+
+    }
+}
+
+@-webkit-keyframes MoveJq {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 400px;
+        left: 448px;
+    }
+    100% {
+        top: 400px;
+        left: 300px;
+        transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
     }
 }
 
@@ -564,6 +847,32 @@ button:hover {
         top: 400px;
         left: 300px;
         transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
+    }
+}
+
+@-webkit-keyframes MoveBs {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 400px;
+        left: 448px;
+    }
+    100% {
+        top: 400px;
+        left: 400px;
+        transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
     }
 }
 
@@ -580,6 +889,32 @@ button:hover {
         top: 400px;
         left: 400px;
         transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
+    }
+}
+
+@-webkit-keyframes MoveSass {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 400px;
+        left: 448px;
+    }
+    100% {
+        top: 400px;
+        left: 500px;
+        transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
     }
 }
 
@@ -596,6 +931,32 @@ button:hover {
         top: 400px;
         left: 500px;
         transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
+    }
+}
+
+@-webkit-keyframes MoveGulp {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 400px;
+        left: 448px;
+    }
+    100% {
+        top: 400px;
+        left: 600px;
+        transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
     }
 }
 
@@ -612,6 +973,11 @@ button:hover {
         top: 400px;
         left: 600px;
         transform: scale(1.2, 1.2);
+        -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
     }
 }
 
@@ -621,7 +987,23 @@ button:hover {
 }
 
 #movingBlock.move {
-    animation: Move 1s ease both;
+    -webkit-animation: Move 1s ease both;
+            animation: Move 1s ease both;
+}
+
+@-webkit-keyframes Move {
+    0% {
+        top: 0px;
+        left: 448px;
+    }
+    50% {
+        top: 64px;
+        left: 448px;
+    }
+    100% {
+        top: 64px;
+        left: 384px;
+    }
 }
 
 @keyframes Move {
@@ -705,6 +1087,8 @@ button:hover {
     height: 300px;
     position: relative;
     left: 0;
+    -webkit-transition: left 0.5s ease-in-out;
+    -o-transition: left 0.5s ease-in-out;
     transition: left 0.5s ease-in-out;
     visibility: hidden;
 }
@@ -719,14 +1103,21 @@ button:hover {
 }
 
 .project img {
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     width: 100%;
     height: 100%;
-    object-position: 50% 50%;
+    -o-object-position: 50% 50%;
+       object-position: 50% 50%;
 }
 
 #portfolioWindow .project img:hover {
     transform: scale(1.2, 1.2);
+    -webkit-transform: scale(1.2, 1.2);
+        -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+        -o-transform: scale(1.2, 1.2);
+
 }
 
 #right,
@@ -758,6 +1149,11 @@ button:hover {
 
 #warior img {
     transform: scale(0.85, 0.85);
+    -webkit-transform: scale(0.85, 0.85);
+        -moz-transform: scale(0.85, 0.85);
+        -ms-transform: scale(0.85, 0.85);
+        -o-transform: scale(0.85, 0.85);
+
 }
 
 #chest {
@@ -784,7 +1180,23 @@ button:hover {
 
 #topLayerContact .smallScroll.throw {
     visibility: visible;
-    animation: throw 0.5s ease both;
+    -webkit-animation: throw 0.5s ease both;
+            animation: throw 0.5s ease both;
+}
+
+@-webkit-keyframes throw {
+    0% {
+        left: 1050px;
+        top: 260px;
+    }
+    50% {
+        left: 950px;
+        top: 220px;
+    }
+    100% {
+        left: 900px;
+        top: 280px;
+    }
 }
 
 @keyframes throw {
@@ -804,8 +1216,21 @@ button:hover {
 
 .loader {
     background-color: #000;
-    animation: Loader 2s ease both;
+    -webkit-animation: Loader 2s ease both;
+            animation: Loader 2s ease both;
     z-index: 11;
+}
+
+@-webkit-keyframes Loader {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes Loader {
@@ -826,8 +1251,12 @@ footer {
     background-color: rgb(236, 240, 250);
     position: absolute;
     bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 footer>p {
