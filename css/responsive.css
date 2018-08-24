@@ -1,6 +1,8 @@
 @media all and (max-width: 960px) {
     #navScroll {
-        transform: scale(0.75, 0.75);
+        -webkit-transform: scale(0.75, 0.75);
+            -ms-transform: scale(0.75, 0.75);
+                transform: scale(0.75, 0.75);
     }
   
 }
@@ -10,9 +12,15 @@
     nav {
         position: absolute;
         height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
-        transform: scale(0.5, 0.5);
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-transform: scale(0.5, 0.5);
+            -ms-transform: scale(0.5, 0.5);
+                transform: scale(0.5, 0.5);
     }
     #navScroll {
         background-image: url(../img/scrollMenueInitTurn.png);
@@ -29,11 +37,21 @@
         background-image: url(../img/scrollMenueTurnOpen.png);
     }
     nav ul {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-flow: wrap;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -ms-flex-flow: wrap;
+            flex-flow: wrap;
         width: 250px;
         padding-top: 120px;
     }
@@ -44,7 +62,9 @@
         margin-top: 10px;
     }
     #media {
-        transform: scale(0.5, 0.5);
+        -webkit-transform: scale(0.5, 0.5);
+            -ms-transform: scale(0.5, 0.5);
+                transform: scale(0.5, 0.5);
     }
 
 }
