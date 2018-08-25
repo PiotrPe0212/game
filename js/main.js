@@ -41,7 +41,7 @@ posMap0Down = 0,
     posMap3Down = 0,
     naviCounter = 0,
     pageNumber = 0,
-    actualMap =[],
+    actualMap = [],
     windowWidth = document.body.offsetWidth,
     gameScale = 1,
     animStep = 0,
@@ -290,7 +290,6 @@ mapGeneration = () => {
 };
 
 mapChosing = (i) => {
-    document.getElementById('loader').classList.add('loader');
     switch (pageNumber) {
         case 0: {
             actualMap = mapMatrix0;
@@ -348,7 +347,6 @@ mapEdit = () => {
         });
     };
     if (pageNumber == 0 && posMap1Down) {
-        document.getElementById('shadowLayer').style.visibility = 'visible';
         warior.style.left = `${64 * gameScale * 14.5}px`;
         warior.style.top = `${64 * gameScale * 0.5}px`;
     }
@@ -388,8 +386,9 @@ mapEdit = () => {
 
 naviFunction = (n) => {
     console.log(n);
-    document.getElementById('shadowLayer').style.visibility = 'hidden';
     pageNumber = n;
+    document.getElementById('shadowLayer').style.visibility = 'hidden';
+
     switch (n) {
         case 0: {
             warior.style.left = `${64 * gameScale * 12}px`;
@@ -397,6 +396,7 @@ naviFunction = (n) => {
             mapChosing(1);
             scrollOpen(0);
             scrollOpenCounter = 1;
+
             break
         }
         case 1: {
@@ -404,6 +404,7 @@ naviFunction = (n) => {
             warior.style.top = `${64 * gameScale * 5}px`;
             mapChosing(1);
             technicActivation();
+
             break
         }
         case 2: {
@@ -412,6 +413,7 @@ naviFunction = (n) => {
             specialCounter = 3;
             mapChosing(1);
             portfolioActivation();
+
             break
         }
         case 3: {
@@ -421,9 +423,11 @@ naviFunction = (n) => {
             chest();
             scrollOpen(0);
             scrollOpenCounter = 1;
+
             break
         }
     }
+
 }
 
 lightObjects = () => {
@@ -603,7 +607,7 @@ portfolioActivation = () => {
         Array.from(specials)[2].classList.add('light');
         specialCounter++;
     }
-    if (specialCounter == 3) {
+    if (specialCounter == 3 && pageNumber == 2) {
         document.getElementById('shadowLayer').style.visibility = 'hidden';
         portfolioInline.style.visibility = 'initial';
         arrowLeft.style.visibility = 'initial';
@@ -621,6 +625,7 @@ chest = () => {
 shadow = (init) => {
     const wariorLayer = document.getElementById('shadowLayer');
     const wariorLayerContext = wariorLayer.getContext("2d");
+
     const shadowScalex = 300 / 1280;
     const shadowScaleY = 150 / 640;
     console.log(hero.posX, hero.posY);
@@ -640,6 +645,7 @@ shadow = (init) => {
             break;
         }
     };
+    wariorLayer.style.visibility = 'visible';
 };
 
 initialValues = () => {
@@ -678,11 +684,12 @@ resize = () => {
     scroll.style.oTransform = `scale(${windowScale * 1.3}, ${windowScale * 1.3})`;
 }
 
-scrollClosing = () => {
+scrollClosing = (event) => {
     scroll.style.display = "none";
     scrollLayer.style.display = "none";
     document.getElementById("main").style.filter = "none";
     scrollOpenCounter = 0;
+    event.stopPropagation();
 }
 
 menuOpen = (event) => {
@@ -735,7 +742,7 @@ function checkKeyDown(key) {
         }
         technicActivation();;
         if (scrollOpenCounter == 1) {
-            scrollClosing();
+            scrollClosing(event);
         }
         else if (scrollOpenCounter == 0) {
             scrollOpen(0);
@@ -749,22 +756,26 @@ function checkKeyDown(key) {
             (posMap2Up && pageNumber == 2)) {
             pageNumber = 0;
             mapChosing(1);
+
             console.log(pageNumber);
         }
         else if ((posMap0Up && pageNumber == 0) ||
             (posMap3Up && pageNumber == 3)) {
             pageNumber = 1;
+
             mapChosing(1);
         }
         else if ((posMap0Down && pageNumber == 0) ||
             (posMap3Down && pageNumber == 3)) {
             pageNumber = 2;
+
             mapChosing(1);
             console.log(pageNumber);
         }
         else if ((posMap1Right && pageNumber == 1) ||
             (posMap2Right && pageNumber == 2)) {
             pageNumber = 3;
+
             mapChosing(1);
         };
         portfolioActivation();

@@ -1247,12 +1247,7 @@ padding-top: 40px;
     }
 }
 
-.loader {
-    background-color: #000;
-    -webkit-animation: Loader 2s ease both;
-            animation: Loader 2s ease both;
-    z-index: 11;
-}
+
 
 @-webkit-keyframes Loader {
     0% {
