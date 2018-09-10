@@ -712,6 +712,7 @@ menuOpen = (event) => {
 
 function checkKeyDown(key) {
     key = key || window.event;
+   if(scrollOpenCounter != 1){
     if (key.keyCode == '38') {
         // up aryMap
         hero.moveUp();
@@ -733,7 +734,8 @@ function checkKeyDown(key) {
         hero.moveRight();
         warior.style.left = (`${hero.posX}px`);
     }
-    else if (key.keyCode == '32') {
+}
+   if (key.keyCode == '32') {
         //space
         if (hero.xSquare == 15 && hero.ySquare == 4 && pageNumber == 0) {
             cloud.style.visibility = "visible";
