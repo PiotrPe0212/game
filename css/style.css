@@ -1130,20 +1130,25 @@ button:hover {
     -o-transition: opacity 0.5s;
     transition: opacity 0.5s;
     text-align: center;
+
 }
 .description:hover{
     opacity :1;
 }
 .description h3{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #000;
     border-bottom: #000 solid 2px;
     padding-top: 40px;
+    padding: 40px 25px 0 25px;
+
 }
 .description p{
     font-size: 1rem;
 color: #000;
 padding-top: 40px;
+text-align: center;
+margin: 0 25px 0 25px;
 }
 #portfolioWindow .project:hover {
     transform: scale(1.2, 1.2);
